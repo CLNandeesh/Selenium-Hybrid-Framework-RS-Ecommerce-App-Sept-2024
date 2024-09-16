@@ -21,24 +21,30 @@ import com.ibm.ecommerceapplication.pageobjects.NavigationBarPage;
 import com.ibm.ecommerceapplication.pageobjects.OrderFinalPage;
 import com.ibm.ecommerceapplication.pageobjects.PaymentPage;
 import com.ibm.ecommerceapplication.pageobjects.ProductCatalougePage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BaseTest {
 
 	public WebDriver driver = null;
-	public LandingPage landingPage =null;
-	public ProductCatalougePage productCatalouge =null;
-	public NavigationBarPage navigationBar =null;
-	public PaymentPage paymentPage=null;
-	public OrderFinalPage orderFinalPage=null;
-	
+	public LandingPage landingPage = null;
+	public ProductCatalougePage productCatalouge = null;
+	public NavigationBarPage navigationBar = null;
+	public PaymentPage paymentPage = null;
+	public OrderFinalPage orderFinalPage = null;
+
+	public Logger logger;
 
 	public WebDriver initializeDriver() throws IOException {
 
+        //Logging
+        logger = LogManager.getLogger(this.getClass());
+        
 		Properties properties = new Properties();
 		FileInputStream fis = new FileInputStream("./\\src\\main\\resources\\config.properties");
 		properties.load(fis);
 		String browser = properties.getProperty("browser");
-		
+
 		switch (browser) {
 		case "chrome":
 			driver = new ChromeDriver();
@@ -55,36 +61,30 @@ public class BaseTest {
 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		
+
 		return driver;
 
 	}
-	
-	@BeforeMethod(alwaysRun=true)
-	public void launchApplication() throws IOException
-	{
-		driver=initializeDriver();
-		landingPage=new LandingPage(driver);
+
+	@BeforeMethod(alwaysRun = true)
+	public void launchApplication() throws IOException {
+		driver = initializeDriver();
+		landingPage = new LandingPage(driver);
 		landingPage.goTo();
 	}
-	
-	@AfterMethod(alwaysRun=true)
-	public void tearDown()
-	{
+
+	@AfterMethod(alwaysRun = true)
+	public void tearDown() {
 		driver.quit();
 	}
-	
-	public String getScreenshot(String testCaseName,WebDriver driver) throws IOException
-	{
-		TakesScreenshot ts = (TakesScreenshot)driver;
+
+	public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
 		File file = new File(System.getProperty("user.dir") + "//reports//" + testCaseName + ".png");
 		FileUtils.copyFile(source, file);
 		return System.getProperty("user.dir") + "//reports//" + testCaseName + ".png";
-		
-	}
 
-	
-	
+	}
 
 }

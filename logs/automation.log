@@ -1,0 +1,8 @@
+2024-09-16 14:40:32 INFO  LoginFunctionalityTest:16 - invalidLoginMessagetest STARTED
+2024-09-16 14:40:32 INFO  LoginFunctionalityTest:19 - Entered Email and Password
+2024-09-16 14:40:33 INFO  LoginFunctionalityTest:22 - Incorrect email or password.
+2024-09-16 14:40:36 INFO  LoginFunctionalityTest:28 - invalidLoginMessagetest ENDED
+2024-09-16 14:40:41 INFO  LoginFunctionalityTest:34 - invalidLoginMessagetest STARTED
+2024-09-16 14:40:42 INFO  LoginFunctionalityTest:37 - Entered Email and Password
+2024-09-16 14:40:42 INFO  LoginFunctionalityTest:39 - Login Successfully
+2024-09-16 14:40:45 INFO  LoginFunctionalityTest:44 - invalidLoginMessagetest ENDED
